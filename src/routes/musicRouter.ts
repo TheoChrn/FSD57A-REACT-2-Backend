@@ -32,6 +32,7 @@ musicRouter.post("/musics", (req: Request, res: Response) => {
   try {
     if (!name || !author || !genre) {
       res.status(401).json({ message: "All fields are required" });
+      return;
     }
 
     const newMusic = {
