@@ -1,15 +1,22 @@
-import Router, { Request, Response } from "express";
-import Users from "../models/Users";
+import Router from "express";
+import {
+  createUser,
+  deleteUser,
+  getAllUsers,
+  getUserById,
+  updateUser,
+} from "../controllers/UserControllers";
 
 const userRouter = Router();
 
-userRouter.get("/users", async (_: Request, res: Response) => {
-  try {
-    const users = await Users.find();
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+userRouter.post("/users", createUser);
+
+userRouter.get("/users", getAllUsers);
+
+userRouter.get("/users/:id", getUserById);
+
+userRouter.put("/users/:id", updateUser);
+
+userRouter.delete("/users/:id", deleteUser);
 
 export default userRouter;
