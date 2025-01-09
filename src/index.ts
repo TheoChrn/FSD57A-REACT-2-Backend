@@ -4,6 +4,7 @@ import express, { Application } from "express";
 import mongoose from "mongoose";
 import musicRouter from "./routes/musicRouter";
 import postRouter from "./routes/postRouter";
+import authRouter from "./routes/authRouter";
 import userRouter from "./routes/userRouter";
 
 const app: Application = express();
@@ -21,7 +22,7 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/api", musicRouter, userRouter, postRouter);
+app.use("/api", musicRouter, userRouter, postRouter, authRouter);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

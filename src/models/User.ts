@@ -5,11 +5,16 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  last_name: {
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
     type: String,
     required: true,
   },
-  passion: {
+  last_name: {
     type: String,
     required: true,
   },
