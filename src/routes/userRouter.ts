@@ -6,6 +6,7 @@ import {
   getUserById,
   updateUser,
 } from "../controllers/userControllers";
+import { verifyUser } from "../middlewares/login-verification";
 
 const userRouter = Router();
 

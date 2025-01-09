@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import Post from "../models/Post"
+import Post from "../models/Post";
 export const getAllPosts = async (req: Request, res: Response) => {
   try {
     const posts = await Post.find().populate("userId");

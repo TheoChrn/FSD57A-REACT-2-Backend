@@ -17,7 +17,8 @@ export const registerUser = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: "Welcome" });
   } catch (error) {
-    res.status(500).json({ message: "Internval server error" });
+    console.error(error);
+    res.status(500).json({ message: "Interval server error" });
   }
 };
 
