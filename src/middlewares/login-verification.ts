@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import { Request, RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 
 export const loginVerification: RequestHandler = async (req, res, next) => {
@@ -15,7 +15,7 @@ interface IUser {
   iat: number;
 }
 
-interface RequestWithUser extends Request {
+export interface RequestWithUser extends Request {
   user?: IUser;
 }
 

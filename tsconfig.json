@@ -2,15 +2,18 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true, 
-    "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "baseUrl": "."
   },
   "include": [
-    "src/index.ts"
+    "src/**/*.ts", 
+    "src/types/**/*.d.ts" 
   ]
 }

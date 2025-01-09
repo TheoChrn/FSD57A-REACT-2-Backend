@@ -1,6 +1,12 @@
-import { Response, Request } from "express";
+import { RequestHandler } from "express";
 import Post from "../models/Post";
-export const getAllPosts = async (req: Request, res: Response) => {
+import { RequestWithUser } from "@/middlewares/login-verification";
+
+export const getAllPosts: RequestHandler = async (
+  req: RequestWithUser,
+  res
+) => {
+  console.log(req.user);
   try {
     const posts = await Post.find().populate("userId");
     res.status(200).json(posts);
@@ -9,8 +15,9 @@ export const getAllPosts = async (req: Request, res: Response) => {
   }
 };
 
-export const createPost = async (req: Request, res: Response) => {
+export const createPost: RequestHandler = async (req, res) => {
   const { title } = req.body;
+
   try {
     await Post.create(req.body);
     res.status(200).json({ message: `Post ${title} created` });
@@ -18,7 +25,7 @@ export const createPost = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-export const getPostById = async (req: Request, res: Response) => {
+export const getPostById: RequestHandler = async (req, res) => {
   const { id } = req.params;
   try {
     const postById = await Post.findById(id).populate("userId");
@@ -28,7 +35,7 @@ export const getPostById = async (req: Request, res: Response) => {
   }
 };
 
-export const deletePost = async (req: Request, res: Response) => {
+export const deletePost: RequestHandler = async (req, res) => {
   const { id } = req.params;
   try {
     const post = await Post.findByIdAndDelete({ _id: id });
@@ -42,7 +49,7 @@ export const deletePost = async (req: Request, res: Response) => {
   }
 };
 
-export const updatePost = async (req: Request, res: Response) => {
+export const updatePost: RequestHandler = async (req, res) => {
   const { id } = req.params;
 
   try {
