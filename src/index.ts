@@ -19,7 +19,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const port = process.env.PORT;
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api", musicRouter, userRouter, postRouter, authRouter);
