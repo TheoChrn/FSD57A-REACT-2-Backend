@@ -25,10 +25,12 @@ export const verifyUser: RequestHandler = async (
   next
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
+
   if (!token) {
     res.status(401).json({ message: "Access denied, no token provided" });
     return;
   }
+
   try {
     const verify = jwt.verify(token, process.env.JWT_SECRET!) as IUser;
 

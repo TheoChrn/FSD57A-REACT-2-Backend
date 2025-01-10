@@ -10,14 +10,14 @@ import { verifyUser } from "../middlewares/login-verification";
 
 const postRouter = Router();
 
-postRouter.post("/posts", createPost);
+postRouter.post("/posts", verifyUser, createPost);
 
 postRouter.get("/posts", verifyUser, getAllPosts);
 
-postRouter.get("/posts/:id", getPostById);
+postRouter.get("/posts/:id", verifyUser, getPostById);
 
-postRouter.put("/posts/:id", updatePost);
+postRouter.put("/posts/:id", verifyUser, updatePost);
 
-postRouter.delete("/posts/:id", deletePost);
+postRouter.delete("/posts/:id", verifyUser, deletePost);
 
 export default postRouter;

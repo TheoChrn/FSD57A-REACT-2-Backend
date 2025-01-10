@@ -6,25 +6,29 @@ export const getAllPosts: RequestHandler = async (
   req: RequestWithUser,
   res
 ) => {
-  console.log(req.user);
   try {
-    const posts = await Post.find().populate("userId");
+    const { user_id } = req.user!;
+    const posts = await Post.find({ userId: user_id }).populate("userId");
+    console.log(posts);
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-export const createPost: RequestHandler = async (req, res) => {
+export const createPost: RequestHandler = async (req: RequestWithUser, res) => {
   const { title } = req.body;
+  const { user_id } = req.user!;
 
   try {
-    await Post.create(req.body);
+    await Post.create({ ...req.body, userId: user_id });
     res.status(200).json({ message: `Post ${title} created` });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 export const getPostById: RequestHandler = async (req, res) => {
   const { id } = req.params;
   try {
